@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "projects": {
+    "api": "apps/api",
+    "api-interfaces": "libs/api-interfaces",
+    "calendar": "apps/calendar",
+    "calendar-e2e": "apps/calendar-e2e"
+  }
+}

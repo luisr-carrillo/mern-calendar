@@ -1,0 +1,29 @@
+{
+  "root": "apps/calendar-e2e",
+  "sourceRoot": "apps/calendar-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/calendar-e2e/cypress.json",
+        "devServerTarget": "calendar:serve",
+        "tsConfig": "apps/calendar-e2e/tsconfig.json"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "calendar:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/calendar-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["calendar"]
+}
