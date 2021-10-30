@@ -1,3 +1,5 @@
+import { Navbar } from '../components/ui';
+
 export default function Calendar() {
-  return <div>calendar works!</div>;
+  return <Navbar />;
 }

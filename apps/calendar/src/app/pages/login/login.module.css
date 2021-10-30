@@ -1,0 +1,61 @@
+.authContainer {
+  margin-top: 15%;
+}
+
+.authContainer h3 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.loginForm {
+  border-radius: 5px;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+  padding: 5%;
+}
+.loginForm h3 {
+  color: #333;
+}
+.signInForm {
+  border-radius: 5px;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+  padding: 5%;
+  background: #0062cc;
+}
+.signInForm h3 {
+  color: #fff;
+}
+.login-container form {
+  padding: 10%;
+}
+.btnSubmit {
+  width: 50%;
+  border-radius: 1rem;
+  padding: 1.5%;
+  border: none;
+  cursor: pointer;
+  transition: background-color 300ms;
+}
+.loginForm .btnSubmit {
+  background-color: #0062cc;
+  color: #fff;
+}
+.loginForm .btnSubmit:hover {
+  background-color: #0056b3;
+}
+.signInForm .btnSubmit {
+  background-color: #fff;
+  color: #0062cc;
+}
+.signInForm .btnSubmit:hover {
+  background-color: #e6f2ff;
+}
+.signInForm .ForgetPwd {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+.loginForm .ForgetPwd {
+  color: #0062cc;
+  font-weight: 600;
+  text-decoration: none;
+}
