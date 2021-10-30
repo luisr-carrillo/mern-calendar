@@ -3,24 +3,58 @@
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "extends": ["airbnb/hooks"],
-      "plugins": ["react", "react-hooks", "testing-library", "jest-dom"],
+      "files": ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+      "extends": [
+        "plugin:testing-library/react",
+        "plugin:jest-dom/recommended",
+        "plugin:jest/recommended"
+      ],
       "rules": {
+        "testing-library/await-async-query": "error",
+        "testing-library/no-await-sync-query": "error",
+        "testing-library/no-debugging-utils": "off",
+        "testing-library/no-dom-import": "off",
         "jest-dom/prefer-checked": "error",
         "jest-dom/prefer-enabled-disabled": "error",
         "jest-dom/prefer-required": "error",
-        "jest-dom/prefer-to-have-attribute": "error",
-        "react-hooks/exhaustive-deps": "warn",
+        "jest-dom/prefer-to-have-attribute": "error"
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "extends": ["airbnb/hooks", "plugin:jsx-a11y/recommended"],
+      "plugins": ["jest-dom", "jsx-a11y", "react-hooks", "react", "testing-library"],
+      "rules": {
         "react-hooks/rules-of-hooks": "error",
-        "react/jsx-curly-newline": "off",
-        "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
-        "react/jsx-one-expression-per-line": "off",
-        "react/prop-types": ["off"],
+        "react-hooks/exhaustive-deps": "warn",
+        "react/jsx-no-duplicate-props": "error",
+        "react/jsx-props-no-spreading": "off",
+        "react/jsx-uses-react": "off",
+        "react/prop-types": "off",
         "react/react-in-jsx-scope": "off",
-        "testing-library/await-async-query": "error",
-        "testing-library/no-await-sync-query": "error",
-        "testing-library/no-debug": "warn"
+        "react/require-default-props": "off",
+        "react/jsx-filename-extension": [
+          "error",
+          {
+            "extensions": ["ts", ".tsx"]
+          }
+        ],
+        "jsx-a11y/label-has-associated-control": [
+          "error",
+          {
+            "required": {
+              "some": ["nesting", "id"]
+            }
+          }
+        ],
+        "jsx-a11y/label-has-for": [
+          "error",
+          {
+            "required": {
+              "some": ["nesting", "id"]
+            }
+          }
+        ]
       }
     },
     {
