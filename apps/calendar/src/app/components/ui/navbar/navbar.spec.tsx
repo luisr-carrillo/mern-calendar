@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '../../../utils/test-utils';
 import Navbar from './navbar';
 
 describe('<navbar />', () => {
@@ -9,7 +9,7 @@ describe('<navbar />', () => {
   test('should render Navbar with Brand and Exit button', () => {
     render(<Navbar />);
     expect(screen.getByRole('navigation')).toBeInTheDocument();
-    expect(screen.getByText('Calendar')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /salir/i })).toBeInTheDocument();
+    expect(screen.getByText('CalendarApp')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /logout/i })).toBeInTheDocument();
   });
 });

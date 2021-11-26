@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '../../utils/test-utils';
 import Login from './login';
 
 describe('<Login />', () => {
@@ -8,9 +8,9 @@ describe('<Login />', () => {
   });
   test('should render sign in and register forms', () => {
     render(<Login />);
-    expect(screen.getByText(/ingreso/i)).toBeInTheDocument();
-    expect(screen.getByText(/registro/i)).toBeInTheDocument();
+    expect(screen.getByText(/sign in/i)).toBeInTheDocument();
+    expect(screen.getByText(/sign up/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /login/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /crear cuenta/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /create account/i })).toBeInTheDocument();
   });
 });

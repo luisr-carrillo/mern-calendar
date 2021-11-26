@@ -1,10 +1,9 @@
-import { render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import App from './app';
+import { render } from './utils/test-utils';
 
 describe('<App />', () => {
   it('should render successfully', async () => {
-    const { baseElement } = render(<App />, { wrapper: MemoryRouter });
+    const { baseElement } = render(<App />);
     expect(baseElement).toBeTruthy();
   });
 });

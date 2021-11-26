@@ -1,5 +1,4 @@
 import { IntlProvider } from 'react-intl';
-import { BrowserRouter } from 'react-router-dom';
 import { useAppSelector } from './hooks/use-apps';
 import { messages } from './i18n/messages';
 import { AppRouter } from './router';
@@ -9,9 +8,7 @@ export default function App() {
 
   return (
     <IntlProvider messages={messages[locale]} locale={locale} defaultLocale="en">
-      <BrowserRouter>
-        <AppRouter />
-      </BrowserRouter>
+      <AppRouter />
     </IntlProvider>
   );
 }
