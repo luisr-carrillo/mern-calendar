@@ -1,6 +1,6 @@
 import { IntlProvider } from 'react-intl';
 import { BrowserRouter } from 'react-router-dom';
-import { useAppSelector } from './hooks/useApps';
+import { useAppSelector } from './hooks/use-apps';
 import { messages } from './i18n/messages';
 import { AppRouter } from './router';
 

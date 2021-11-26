@@ -7,8 +7,8 @@ import startOfWeek from 'date-fns/startOfWeek';
 import { Calendar as BigCalendar, dateFnsLocalizer, Event } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Navbar } from '../../components/ui';
-import { useAppSelector } from '../../hooks/useApps';
-import { useCalendarMsgs } from '../../hooks/useCalendarMsgs';
+import { useAppSelector } from '../../hooks/use-apps';
+import { useCalendarMsgs } from '../../hooks/use-calendar-msgs';
 import styles from './calendar.module.css';
 
 type CalendarEvents = Event & { bgcolor: string };
