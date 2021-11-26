@@ -7,6 +7,7 @@ import startOfWeek from 'date-fns/startOfWeek';
 import { Calendar as BigCalendar, dateFnsLocalizer, Event } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Navbar } from '../../components/ui';
+import { useAppSelector } from '../../hooks/useApps';
 import { useCalendarMsgs } from '../../hooks/useCalendarMsgs';
 import styles from './calendar.module.css';
 
@@ -36,6 +37,7 @@ const events: CalendarEvents[] = [
 
 export default function Calendar() {
   const messages = useCalendarMsgs();
+  const { locale } = useAppSelector((state) => state.language);
 
   return (
     <div className={styles.calendar}>
@@ -45,7 +47,7 @@ export default function Calendar() {
         events={events}
         startAccessor="start"
         endAccessor="end"
-        culture={navigator.language}
+        culture={locale}
         messages={messages}
       />
     </div>

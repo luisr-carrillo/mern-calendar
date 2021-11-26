@@ -1,23 +1,5 @@
 import { Locales } from './locales';
 
-type Message = {
-  [locale: string]: {
-    calendar: {
-      allDay: string;
-      today: string;
-      month: string;
-      week: string;
-      day: string;
-      agenda: string;
-      date: string;
-      time: string;
-      event: string;
-      noEventsInRange: string;
-      showMore: string;
-    };
-  };
-};
-
 export const messages = {
   [Locales.SPANISH]: {
     allDay: 'Todo el día',
@@ -31,6 +13,9 @@ export const messages = {
     event: 'Evento',
     noEventsInRange: 'No hay eventos en este rango',
     showMore: 'Ver más',
+    spanish: 'Español',
+    english: 'Inglés',
+    logout: 'Cerrar sesión',
   },
   [Locales.ENGLISH]: {
     allDay: 'All day',
@@ -44,5 +29,8 @@ export const messages = {
     event: 'Event',
     noEventsInRange: 'There are no more events for the selected range',
     showMore: 'Show more',
+    spanish: 'Spanish',
+    english: 'English',
+    logout: 'Logout',
   },
 };
