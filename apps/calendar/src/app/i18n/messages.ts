@@ -1,34 +1,19 @@
 import { Locales } from './locales';
+import { calendar } from './calendar';
+import { form } from './form';
 
 export const messages = {
   [Locales.SPANISH]: {
-    allDay: 'Todo el día',
-    today: 'Hoy',
-    month: 'Mes',
-    week: 'Semana',
-    day: 'Día',
-    agenda: 'Agenda',
-    date: 'Fecha',
-    time: 'Hora',
-    event: 'Evento',
-    noEventsInRange: 'No hay eventos en este rango',
+    ...calendar.spa,
+    ...form.spa,
     showMore: 'Ver más',
     spanish: 'Español',
     english: 'Inglés',
     logout: 'Cerrar sesión',
   },
   [Locales.ENGLISH]: {
-    allDay: 'All day',
-    today: 'Today',
-    month: 'Month',
-    week: 'Week',
-    day: 'Day',
-    agenda: 'Agenda',
-    date: 'Date',
-    time: 'Time',
-    event: 'Event',
-    noEventsInRange: 'There are no more events for the selected range',
-    showMore: 'Show more',
+    ...calendar.eng,
+    ...form.eng,
     spanish: 'Spanish',
     english: 'English',
     logout: 'Logout',
