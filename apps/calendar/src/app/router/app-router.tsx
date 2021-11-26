@@ -1,12 +1,12 @@
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { Calendar, Login } from '../pages/index';
 
 export default function AppRouter() {
   return (
-    <Switch>
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/" component={Calendar} />
-      <Redirect to="/" />
-    </Switch>
+    <Routes>
+      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="/" element={<Calendar />} />
+      <Route path="login" element={<Login />} />
+    </Routes>
   );
 }
