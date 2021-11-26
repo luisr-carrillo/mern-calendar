@@ -6,6 +6,8 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'babel-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  collectCoverage: true,
+  coverageReporters: ['json', 'lcov', 'text'],
   coverageDirectory: '../../coverage/apps/calendar',
   setupFilesAfterEnv: ['<rootDir>/src/jest-setup.ts'],
 };
