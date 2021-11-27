@@ -12,7 +12,9 @@ import {
   View,
 } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { Button } from 'react-bootstrap';
 import { Event } from '../../components/calendar/event';
+import { Modal } from '../../components/calendar/modal';
 import { Navbar } from '../../components/ui';
 import { useAppSelector } from '../../hooks/use-apps';
 import { useCalendarMsgs } from '../../hooks/use-calendar-msgs';
@@ -48,6 +50,7 @@ const events: CalendarEvents[] = [
 ];
 
 export default function Calendar() {
+  const [modalOpen, setModalOpen] = useState(false);
   const messages = useCalendarMsgs();
   const { locale } = useAppSelector((state) => state.language);
   const [lastView, setLastView] = useState<View>(
@@ -100,6 +103,11 @@ export default function Calendar() {
         startAccessor="start"
         view={lastView}
       />
+      {/* //TODO: Delete button and add a valid behavior */}
+      <Button type="button" onClick={() => setModalOpen(true)}>
+        Modal
+      </Button>
+      <Modal show={modalOpen} handleClose={() => setModalOpen(false)} />
     </div>
   );
 }

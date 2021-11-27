@@ -8,6 +8,7 @@ export const form = {
     confirmpass: 'Confirmar contraseña',
     login: 'Ingresar',
     createAccount: 'Crear cuenta',
+    save: 'Guardar',
   },
   eng: {
     signup: 'Sign Up',
@@ -18,5 +19,6 @@ export const form = {
     confirmpass: 'Confirm Password',
     login: 'Login',
     createAccount: 'Create account',
+    save: 'Save',
   },
 };
