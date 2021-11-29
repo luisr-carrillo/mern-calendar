@@ -16,7 +16,8 @@ import { Button } from 'react-bootstrap';
 import { Event } from '../../components/calendar/event';
 import { Modal } from '../../components/calendar/modal';
 import { Navbar } from '../../components/ui';
-import { useAppSelector } from '../../hooks/use-apps';
+import { openModal } from '../../features/ui-slice';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-apps';
 import { useCalendarMsgs } from '../../hooks/use-calendar-msgs';
 import { CalendarEvents } from '../../models/Calendar';
 import styles from './calendar.module.css';
@@ -50,7 +51,7 @@ const events: CalendarEvents[] = [
 ];
 
 export default function Calendar() {
-  const [modalOpen, setModalOpen] = useState(false);
+  const dispatch = useAppDispatch();
   const messages = useCalendarMsgs();
   const { locale } = useAppSelector((state) => state.language);
   const [lastView, setLastView] = useState<View>(
@@ -61,7 +62,7 @@ export default function Calendar() {
     event: CalendarEvents,
     e: SyntheticEvent<HTMLElement, Event>,
   ) => {
-    console.log('onDoubleClick:', { event, e });
+    dispatch(openModal());
   };
   const onSelectEvent = (
     event: CalendarEvents,
@@ -103,11 +104,7 @@ export default function Calendar() {
         startAccessor="start"
         view={lastView}
       />
-      {/* //TODO: Delete button and add a valid behavior */}
-      <Button type="button" onClick={() => setModalOpen(true)}>
-        Modal
-      </Button>
-      <Modal show={modalOpen} handleClose={() => setModalOpen(false)} />
+      <Modal />
     </div>
   );
 }

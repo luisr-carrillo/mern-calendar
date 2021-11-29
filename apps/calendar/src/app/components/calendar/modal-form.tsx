@@ -102,7 +102,7 @@ export const ModalForm = ({ handleClose }: ModalFormProps) => {
         <Form.Control
           name="title"
           type="text"
-          className={titleError ? 'is-invalid' : ''}
+          isInvalid={titleError}
           value={title}
           onChange={handleInputChange}
           placeholder={calendarFormTitle}
