@@ -1,10 +1,13 @@
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { addHours, isAfter, isEqual } from 'date-fns';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import DateTimeRangePicker from 'react-datetime-picker';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { addNewEvent, updateEvent } from '../../features/calendar-slice';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-apps';
+import { CalendarEvent } from '../../models/Calendar';
 import MySwal from '../../utils/swal';
 
 export interface ModalFormProps {
@@ -13,21 +16,36 @@ export interface ModalFormProps {
 
 const now = new Date().setHours(12, 0, 0, 0);
 
+const formData = {
+  title: '',
+  notes: '',
+  start: new Date(now),
+  end: new Date(addHours(now, 1)),
+};
+
 export const ModalForm = ({ handleClose }: ModalFormProps) => {
+  const dispatch = useAppDispatch();
+  const { activeEvent } = useAppSelector((state) => state.calendar);
   const [titleError, setTitleError] = useState(false);
-  const [startDate, setStartDate] = useState(new Date(now));
-  const [endDate, setEndDate] = useState(new Date(addHours(now, 1)));
-  const [form, setForm] = useState({
-    title: '',
-    notes: '',
-    start: startDate,
-    end: endDate,
-  });
   const intl = useIntl();
   const calendarFormTitle = `${intl.formatMessage({ id: 'calendarFormTitle' })} *`;
   const calendarFormNotes = intl.formatMessage({ id: 'calendarFormNotes' });
+  const [form, setForm] = useState(formData);
 
   const { title, notes, start, end } = form;
+
+  useEffect(() => {
+    if (activeEvent) {
+      setForm({
+        title: activeEvent.title,
+        notes: activeEvent.notes,
+        start: new Date(activeEvent.start),
+        end: new Date(activeEvent.end),
+      });
+    } else {
+      setForm(formData);
+    }
+  }, [activeEvent, setForm]);
 
   const handleInputChange = ({
     target: { name, value },
@@ -56,21 +74,31 @@ export const ModalForm = ({ handleClose }: ModalFormProps) => {
     }
 
     setTitleError(false);
+    const data = { ...form, start: start.toISOString(), end: end.toISOString() };
     // TODO - send to API
-    // eslint-disable-next-line no-console
-    console.log({ form });
+    if (activeEvent && activeEvent.id) {
+      dispatch(updateEvent({ ...data, id: activeEvent.id, user: activeEvent.user }));
+    } else {
+      dispatch(
+        addNewEvent({
+          ...data,
+          id: new Date().getTime(),
+          user: { id: 1, name: 'Luis Carrillo' },
+        }),
+      );
+    }
     handleClose();
+    setForm(formData);
   };
 
   return (
     <Form noValidate autoComplete="off" onSubmit={onSubmit}>
       <Form.Floating className="mb-3">
         <DateTimeRangePicker
-          value={startDate}
+          value={start}
           className="form-control"
           onChange={(val) => {
             if (!val) return;
-            setStartDate(val);
             setForm({ ...form, start: val });
           }}
         />
@@ -80,12 +108,11 @@ export const ModalForm = ({ handleClose }: ModalFormProps) => {
       </Form.Floating>
       <Form.Floating className="mb-3">
         <DateTimeRangePicker
-          value={endDate}
+          value={end}
           className="form-control"
-          minDate={startDate}
+          minDate={start}
           onChange={(val) => {
             if (!val) return;
-            setEndDate(val);
             setForm({ ...form, end: val });
           }}
         />

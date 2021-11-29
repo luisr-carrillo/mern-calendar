@@ -1,7 +1,7 @@
-import { CalendarEvents } from '../../models/Calendar';
+import { CalendarEvent } from '../../models/Calendar';
 
 interface EventProps {
-  event: CalendarEvents;
+  event: CalendarEvent;
 }
 
 export const Event = ({ event }: EventProps) => {

@@ -1,7 +1,9 @@
-import type { Event } from 'react-big-calendar';
-
-export type CalendarEvents = Event & {
-  bgcolor: string;
+export interface CalendarEvent {
+  title: string;
+  start: Date;
+  end: Date;
   notes: string;
-  user: { id: string; name: string };
-};
+  user: { id: number | string; name: string };
+  id?: number | string;
+  allDay?: boolean;
+}

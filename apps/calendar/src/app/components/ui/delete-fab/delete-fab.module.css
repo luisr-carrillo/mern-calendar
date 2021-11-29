@@ -1,0 +1,11 @@
+.DeleteFab {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  transition: all 300ms;
+}
+.DeleteFab:active {
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+  transition-delay: 0s;
+}

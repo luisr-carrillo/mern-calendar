@@ -1,25 +1,28 @@
-import { addHours } from 'date-fns';
 import format from 'date-fns/format';
 import getDay from 'date-fns/getDay';
 import { enUS, es } from 'date-fns/locale';
 import parse from 'date-fns/parse';
 import startOfWeek from 'date-fns/startOfWeek';
-import { SyntheticEvent, useState } from 'react';
+import { useState } from 'react';
 import {
   Calendar as BigCalendar,
   dateFnsLocalizer,
   EventPropGetter,
+  SlotInfo,
   View,
 } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { Button } from 'react-bootstrap';
 import { Event } from '../../components/calendar/event';
 import { Modal } from '../../components/calendar/modal';
 import { Navbar } from '../../components/ui';
+import { AddNewFab } from '../../components/ui/add-new-fab/add-new-fab';
+import { DeleteFab } from '../../components/ui/delete-fab/delete-fab';
+import { clearActiveEvent, setActiveEvent } from '../../features/calendar-slice';
 import { openModal } from '../../features/ui-slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-apps';
 import { useCalendarMsgs } from '../../hooks/use-calendar-msgs';
-import { CalendarEvents } from '../../models/Calendar';
+import { CalendarEvent } from '../../models/Calendar';
+import { convertDateToState, convertStateToDate } from '../../utils/utils';
 import styles from './calendar.module.css';
 
 const locales = {
@@ -35,47 +38,16 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-const today = new Date(2021, 10, 25, 12);
-const events: CalendarEvents[] = [
-  {
-    title: 'Cumpleaños amigo',
-    start: today,
-    end: addHours(today, 4),
-    bgcolor: '#fafafa',
-    notes: 'Comprar pastel',
-    user: {
-      id: '123',
-      name: 'Luis Carrillo',
-    },
-  },
-];
-
 export default function Calendar() {
   const dispatch = useAppDispatch();
   const messages = useCalendarMsgs();
   const { locale } = useAppSelector((state) => state.language);
+  const { events, activeEvent } = useAppSelector((state) => state.calendar);
   const [lastView, setLastView] = useState<View>(
     (localStorage.getItem('udemy-calendar-last-view') as View | null) || 'month',
   );
 
-  const onDoubleClick = (
-    event: CalendarEvents,
-    e: SyntheticEvent<HTMLElement, Event>,
-  ) => {
-    dispatch(openModal());
-  };
-  const onSelectEvent = (
-    event: CalendarEvents,
-    e: SyntheticEvent<HTMLElement, Event>,
-  ) => {
-    console.log('onSelectEvent:', { event, e });
-  };
-  const onViewChange = (view: View) => {
-    setLastView(view);
-    localStorage.setItem('udemy-calendar-last-view', view);
-  };
-
-  const eventStyleGet: EventPropGetter<CalendarEvents> = () => {
+  const eventStyleGet: EventPropGetter<CalendarEvent> = () => {
     const style = {
       display: 'block',
       color: 'white',
@@ -87,6 +59,28 @@ export default function Calendar() {
     return { style };
   };
 
+  const clearEvent = () => {
+    dispatch(clearActiveEvent());
+  };
+
+  const onDoubleClick = () => {
+    dispatch(openModal());
+  };
+
+  const onSelectEvent = (event: CalendarEvent) => {
+    dispatch(setActiveEvent(convertDateToState(event)));
+  };
+
+  const onViewChange = (view: View) => {
+    clearEvent();
+    setLastView(view);
+    localStorage.setItem('udemy-calendar-last-view', view);
+  };
+
+  const onSelectSlot = () => {
+    clearEvent();
+  };
+
   return (
     <div className={styles.calendar}>
       <Navbar />
@@ -95,7 +89,7 @@ export default function Calendar() {
         culture={locale}
         endAccessor="end"
         eventPropGetter={eventStyleGet}
-        events={events}
+        events={events.map(convertStateToDate)}
         localizer={localizer}
         messages={messages}
         onDoubleClickEvent={onDoubleClick}
@@ -103,7 +97,11 @@ export default function Calendar() {
         onView={onViewChange}
         startAccessor="start"
         view={lastView}
+        selectable
+        onSelectSlot={onSelectSlot}
       />
+      {activeEvent && <DeleteFab />}
+      <AddNewFab />
       <Modal />
     </div>
   );

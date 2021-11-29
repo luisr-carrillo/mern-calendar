@@ -8357,6 +8357,11 @@ react-calendar@^3.3.1:
     merge-class-names "^1.1.1"
     prop-types "^15.6.0"
 
+react-click-away-listener@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/react-click-away-listener/-/react-click-away-listener-2.0.5.tgz#451193f5957cebeb02face700391dd99951f2526"
+  integrity sha512-sFFuuQ52ABwkrKxnYE5FbpA1zBjvJsOYmKXNg9XCTRU+iWc9bk/vpWBJQN0qEohlnmQpDQZk14ygPMTnXAnlEA==
+
 react-clock@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-clock/-/react-clock-3.0.0.tgz#0d29f8e682ef516574061d1d24b1a286cb2da89b"
